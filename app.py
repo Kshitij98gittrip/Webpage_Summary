@@ -1,15 +1,11 @@
 from flask import Flask,request,jsonify
 from GetWebsiteContent import GetWebsiteContent
 from WebpageSummary import WebPageSummary
-# from transformers import pipeline
 from ExtractMajorPoints import ExtractMajorPoints
 
 app = Flask(__name__)
-
-
-# web_data                =   GetWebsiteContent(url)
-# scraped_data            =   web_data.scrape_website()
-
+   
+#FUNCTION TO GENERATE SUMMARY
 @app.get('/summary')
 def summary_api():
     url=request.args.get('url','')
@@ -19,6 +15,7 @@ def summary_api():
     summary                 =   webpage_summmary_Obj.generate_summary()
     return summary,200
 
+#FUNCTION TO GENERATE MAJOR POINTS
 @app.get('/majorpoints')
 def majorpoints_api():
     url=request.args.get('url','')

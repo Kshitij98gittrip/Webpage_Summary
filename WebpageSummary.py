@@ -20,8 +20,7 @@ class WebPageSummary:
         stopWords = set(stopwords.words("english"))
         words = word_tokenize(scraped_data)
         
-        # Creating a frequency table to keep the 
-        # score of each word
+        # Creating a frequency table to keep the score of each word
         freqTable = dict()
         for word in words:
             word = word.lower()
@@ -32,8 +31,7 @@ class WebPageSummary:
             else:
                 freqTable[word] = 1
         
-        # Creating a dictionary to keep the score
-        # of each sentence
+        # Creating a dictionary to keep the score of each sentence
         sentences = sent_tokenize(scraped_data)
         sentenceValue = dict()
         

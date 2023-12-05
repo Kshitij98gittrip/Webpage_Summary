@@ -19,13 +19,13 @@ class GetWebsiteContent:
 
                 # Perform web scraping here
                 text_data = ''
-                # bullet_list=[]
+
                 for tag in soup.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
                     text_data += tag.get_text()
-                    # bullet_list.append(tag.get_text())
 
                 # Return the scraped data
                 return {"content":text_data}
+            
             else:
                 return {"error": "Failed to retrieve the webpage. Status code: " + str(response.status_code)}
         except Exception as e:
