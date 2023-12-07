@@ -20,7 +20,7 @@ class WebPageSummary:
         stopWords = set(stopwords.words("english"))
         words = word_tokenize(scraped_data)
         
-        # Creating a frequency table to keep the score of each word
+        # Frequency table to keep the score of each word
         freqTable = dict()
         for word in words:
             word = word.lower()
@@ -31,7 +31,7 @@ class WebPageSummary:
             else:
                 freqTable[word] = 1
         
-        # Creating a dictionary to keep the score of each sentence
+        # Dictionary to keep the score of each sentence
         sentences = sent_tokenize(scraped_data)
         sentenceValue = dict()
         
@@ -49,7 +49,7 @@ class WebPageSummary:
         # Calculate the threshold for sentence inclusion
         threshold = threshold_multiplier * sum(sentenceValue.values()) / len(sentences)
         
-        # Create the summary with a maximum number of sentences
+        # Summary with a maximum number of sentences
         summary = ''
         sentence_count = 0
         for sentence, score in sorted_sentences:

@@ -6,7 +6,8 @@ from ExtractMajorPoints import ExtractMajorPoints
 app = Flask(__name__)
    
 #FUNCTION TO GENERATE SUMMARY
-@app.get('/summary')
+# @app.get('/summary')
+@app.route('/summary', methods=['GET'])
 def summary_api():
     url=request.args.get('url','')
     web_data                =   GetWebsiteContent(url)
@@ -16,7 +17,8 @@ def summary_api():
     return summary,200
 
 #FUNCTION TO GENERATE MAJOR POINTS
-@app.get('/majorpoints')
+# @app.get('/majorpoints')
+@app.route('/majorpoints', methods=['GET'])
 def majorpoints_api():
     url=request.args.get('url','')
     web_data                =   GetWebsiteContent(url)

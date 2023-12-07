@@ -12,6 +12,7 @@ btn.addEventListener("click", function() {
             p.innerHTML = text;
             btn.disabled = false;
             btn.innerHTML = "Summarise";
+            addCopyButton("output");
         }
         xhr.send();
     });
@@ -37,7 +38,32 @@ btn1.addEventListener("click", function() {
             p.innerHTML += '</ul>';
             btn1.disabled = false;
             btn1.innerHTML = "Major Points";
+            addCopyButton("output1");
         }
         xhr.send();
     });
 });
+
+function addCopyButton(outputId) {
+    const p = document.getElementById(outputId);
+
+    // Create a button for copying
+    const copyButton = document.createElement("button");
+    copyButton.innerText = "Copy to Clipboard";
+    copyButton.addEventListener("click", function () {
+        copyToClipboard(p.innerText);
+    });
+
+    // Append the copy button to the specified output element
+    p.appendChild(copyButton);
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function () {
+        // console.log("Text successfully copied to clipboard");
+        alert('Text copied to clipboard!');
+
+    }).catch(function (err) {
+        console.error("Unable to copy text to clipboard", err);
+    });
+}

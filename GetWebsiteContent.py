@@ -12,18 +12,18 @@ class GetWebsiteContent:
             url=self.url
             response = requests.get(url)
 
-            # Check if the request was successful
             if response.status_code == 200:
+
                 # Parse the HTML content of the page
                 soup = BeautifulSoup(response.text, 'html.parser')
 
-                # Perform web scraping here
+                # Data Scraping
                 text_data = ''
 
                 for tag in soup.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
                     text_data += tag.get_text()
 
-                # Return the scraped data
+                # Scraped data
                 return {"content":text_data}
             
             else:
