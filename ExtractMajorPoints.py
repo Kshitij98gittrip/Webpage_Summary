@@ -15,10 +15,10 @@ class ExtractMajorPoints:
             spacy.cli.download("en_core_web_sm")
             nlp = spacy.load("en_core_web_sm")
 
-        article_text = self.scraped_data['content']
-        doc = nlp(article_text)
+        article_text    =   self.scraped_data
+        doc             =   nlp(article_text)
 
         # Extract major points (sentences)
-        major_points = [sent.text for sent in doc.sents]
+        major_points    =   [sent.text for sent in doc.sents]
 
         return major_points

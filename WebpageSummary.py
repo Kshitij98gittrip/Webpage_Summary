@@ -11,17 +11,18 @@ class WebPageSummary:
         self.scraped_data=scraped_data
 
 
-    def generate_summary(self, max_sentences=3, threshold_multiplier=0.5):
-        scraped_data = self.scraped_data
-        scraped_data = scraped_data['content']
+    def generate_summary(self, max_sentences=20, threshold_multiplier=0.3):
+        scraped_data    =   self.scraped_data
+        scraped_data    =   scraped_data['content']
         
         
         # Tokenizing the text
-        stopWords = set(stopwords.words("english"))
-        words = word_tokenize(scraped_data)
+        stopWords       =   set(stopwords.words("english"))
+        words           =   word_tokenize(scraped_data)
         
         # Frequency table to keep the score of each word
-        freqTable = dict()
+        freqTable       =   dict()
+
         for word in words:
             word = word.lower()
             if word in stopWords:
@@ -32,8 +33,8 @@ class WebPageSummary:
                 freqTable[word] = 1
         
         # Dictionary to keep the score of each sentence
-        sentences = sent_tokenize(scraped_data)
-        sentenceValue = dict()
+        sentences       =   sent_tokenize(scraped_data)
+        sentenceValue   =   dict()
         
         for sentence in sentences:
             for word, freq in freqTable.items():
@@ -44,14 +45,14 @@ class WebPageSummary:
                         sentenceValue[sentence] = freq
         
         # Sort sentences by score in descending order
-        sorted_sentences = sorted(sentenceValue.items(), key=lambda x: x[1], reverse=True)
+        sorted_sentences =  sorted(sentenceValue.items(), key=lambda x: x[1], reverse=True)
         
         # Calculate the threshold for sentence inclusion
-        threshold = threshold_multiplier * sum(sentenceValue.values()) / len(sentences)
+        threshold        =  threshold_multiplier * sum(sentenceValue.values()) / len(sentences)
         
         # Summary with a maximum number of sentences
-        summary = ''
-        sentence_count = 0
+        summary          =  ''
+        sentence_count   =  0
         for sentence, score in sorted_sentences:
             if sentenceValue[sentence] >= threshold:
                 summary += " " + sentence
